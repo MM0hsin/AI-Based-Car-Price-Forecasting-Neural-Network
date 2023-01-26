@@ -32,11 +32,6 @@ for i=1:height(transmissionNarray)
         automatic(i) = 1;
         manual(i) = 0;
     end
-%     if transmissionNarray(i,1) == 2 || transmissionNarray(i,1) == 3
-%         automatic(i) = 1;
-%     else
-%         automatic(i) = 0;
-%     end
 end
 
 carDataFinal(:,"transmission") = [];
