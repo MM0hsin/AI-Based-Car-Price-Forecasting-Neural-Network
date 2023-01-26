@@ -1,20 +1,14 @@
 carData;
 carDataFinalRand = carDataFinal(randperm(size(carDataFinal,1)), :);
-% r = corrplot(carDataFinalRand);
-
-n = 10000;
-carTrainX1 = (carDataFinalRand.year(1:n,:)).';
-carTrainX2 = (carDataFinalRand.mileage(1:n,:)).';
-carTrainT = (carDataFinalRand.price(1:n,:)).';
-carTrainMatrix = [carTrainX1(:),carTrainX2(:)].';
-
-net = newff(carTrainMatrix,carTrainT,[3,3],{'tansig','purelin'},'traingd');
-net.trainParam.show = 50;
-net.trainParam.lr = 0.05;
-net.trainParam.epochs = 300;
-net.trainParam.goal = 1e-5;
+r = corrplot(carDataFinalRand);
 
 
+X1 = table2array([carDataFinalRand(1:1000,"year"),carDataFinalRand(1:1000,"mileage"), ...
+    carDataFinalRand(1:1000,"tax"),carDataFinalRand(1:1000,"engineSize") ...
+    carDataFinalRand(1:1000,"mpg"),carDataFinalRand(1:1000,"automatic")]);
+Y = table2array([carDataFinalRand(1:1000,"price")]);
 
-[net, tr] = train(net,carTrainMatrix,carTrainT);
-a = sim(net,carTrainMatrix).'; 
+model = fitlm(X1,Y)
+n = 6000;
+ypred = -3.0245e+06 + 1502.5*(carDataFinalRand.year(n)) + (-0.0854* carDataFinalRand.mileage(n)) +
+        0.18228*(carDataFinalRand.tax(n)) + 10606
