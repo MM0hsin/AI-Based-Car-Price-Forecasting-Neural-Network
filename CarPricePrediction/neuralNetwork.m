@@ -1,6 +1,8 @@
-% carData;
-% carDataFinalRand = carDataFinal(randperm(size(carDataFinal,1)), :);
-% r = corrplot(carDataFinalRand);
+if exist('carDataFinal','var') == 0
+    carData;
+    carDataFinalRand = carDataFinal(randperm(size(carDataFinal,1)), :);
+    r = corrplot(carDataFinalRand);
+end
 
 X1 = table2array([carDataFinalRand(:,"year"), ...
     carDataFinalRand(:,"mileage"), ...
@@ -11,11 +13,15 @@ X1 = table2array([carDataFinalRand(:,"year"), ...
     carDataFinalRand(:,"fuelType")]);
 Y = table2array([carDataFinalRand(:,"price")]);
 
-Xtrain = [X1(1:1000,1), X1(1:1000,2), X1(1:1000,3), ...
-    X1(1:1000,4), X1(1:1000,5), X1(1:1000,6), X1(1:1000,7)];
-Ytrain = table2array([carDataFinalRand(1:1000,"price")]);
+n = 10000;
+Xtrain = [X1(1:n,1), X1(1:n,2), X1(1:n,3), ...
+    X1(1:n,4), X1(1:n,5), X1(1:n,6), X1(1:n,7)];
+Ytrain = table2array([carDataFinalRand(1:n,"price")]);
 
-net = newff(Xtrain,Ytrain,[10,10],{'tansig','purelin'},'trainlm');
+Xtrain = Xtrain.';
+Ytrain = Ytrain.';
+
+net = newff(Xtrain,Ytrain,[20,20,20],{'tansig','purelin'},'trainlm');
 net.trainParam.show = 50;
 net.trainParam.lr = 0.05;
 net.trainParam.epochs = 300;
@@ -23,9 +29,8 @@ net.trainParam.goal = 1e-5;
 
 size(Xtrain)
 size(Ytrain)
-Xtrain = Xtrain.';
-Ytrain = Ytrain.';
-
 
 [net, tr] = train(net,Xtrain,Ytrain);
-% a = sim(net,carTrainMatrix);
+a = fix(sim(net,Xtrain));
+
+Z = [a.',Ytrain.',Ytrain.'-a.'];
