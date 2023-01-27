@@ -5,7 +5,7 @@ transmissionType = table2array(x(:,"transmission"));
 fuelType = table2array(x(:,"fuelType"));
 
 [name,~,nameNarray] = unique(modelType);
-nameN = 1:167;
+nameN = 1:size(name);
 typeModel = dictionary(name,nameN.');
 
 
@@ -15,7 +15,7 @@ typeTransmission = dictionary(transmission,transmissionN.');
 
 
 [fuel,~,fuelNarray] = unique(fuelType);
-fuelN = 1:3;
+fuelN = 1:size(fuel);
 typeFuel = dictionary(fuel,fuelN.');
 
 carDataFinal = x(:,:);
