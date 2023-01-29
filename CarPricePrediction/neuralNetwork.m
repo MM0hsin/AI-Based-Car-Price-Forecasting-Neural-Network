@@ -10,17 +10,18 @@ X1 = table2array([carDataFinalRand(:,"year"), ...
     carDataFinalRand(:,"mpg"),...
     carDataFinalRand(:,"engineSize"), ...
     carDataFinalRand(:,"automatic"),...
-    carDataFinalRand(:,"fuelType")]);
+    carDataFinalRand(:,"fuelType"), ...
+    carDataFinalRand(:,"model"),]);
 Y = table2array([carDataFinalRand(:,"price")]);
 
 n = 8000;
 Xtrain = [X1(1:n,1), X1(1:n,2), X1(1:n,3), ...
-    X1(1:n,4), X1(1:n,5), X1(1:n,6), X1(1:n,7)];
+    X1(1:n,4), X1(1:n,5), X1(1:n,6), X1(1:n,7), X1(1:n,8)];
 Ytrain = table2array([carDataFinalRand(1:n,"price")]);
 
 n1 = 16000
 Xtest = [X1(n:n1,1), X1(n:n1,2), X1(n:n1,3), ...
-    X1(n:n1,4), X1(n:n1,5), X1(n:n1,6), X1(n:n1,7)];
+    X1(n:n1,4), X1(n:n1,5), X1(n:n1,6), X1(n:n1,7),X1(n:n1,8)];
 Ytest = table2array([carDataFinalRand(n:n1,"price")]);
 
 Xtrain = Xtrain.';
@@ -39,3 +40,11 @@ net.trainParam.goal = 1e-5;
 a = fix(sim(net,Xtest));
 
 Z = [a.',Ytest.',Ytest.'-a.'];
+
+correct = 0;
+for i = 1:size(Z)
+    if abs(Z(i,3)) < 5000
+        correct = correct +1;
+    end
+end
+accuracy = correct/8001

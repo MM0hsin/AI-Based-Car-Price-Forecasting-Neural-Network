@@ -27,3 +27,11 @@ for i =1:size(X1)
 end
 Z = fix([Z.',Y,Y-Z.']);
 
+correct = 0;
+for i = 1:size(Z)
+    if abs(Z(i,3)) < 5000
+        correct = correct +1;
+    end
+end
+accuracy = correct/17953
+
