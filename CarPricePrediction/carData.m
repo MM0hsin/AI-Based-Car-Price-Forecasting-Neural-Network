@@ -62,4 +62,11 @@ carDataFinal.petrol = petrol.';
 carDataFinal.diesel = diesel.';
 carDataFinal.hybrid = hybrid.';
 
+%% Removing outliers:
+
+% mileageOutlier = carDataFinal.mileage > 66000;
+% carDataFinal.mileage(mileageOutlier) = 0;
+% carDataFinal(~carDataFinal.mileage,:) = [];
+
+
 
