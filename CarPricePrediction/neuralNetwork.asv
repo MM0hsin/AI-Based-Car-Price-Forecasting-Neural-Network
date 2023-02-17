@@ -42,10 +42,10 @@ Ytrain = Ytrain.';
 Xtest = Xtest.';
 Ytest =Ytest.';
 
-net = newff(Xtrain,Ytrain,[20,20,20],{'tansig','purelin'},'trainlm');
+net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainbfg');
 net.trainParam.show = 50;
 net.trainParam.lr = 0.05;
-net.trainParam.epochs = 100;
+net.trainParam.epochs = 1000;
 net.trainParam.goal = 1e-5;
 
 
