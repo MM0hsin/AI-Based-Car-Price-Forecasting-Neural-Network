@@ -19,7 +19,7 @@ Xtrain = [X1(1:n,1), X1(1:n,2), X1(1:n,3), ...
     X1(1:n,4), X1(1:n,5), X1(1:n,6), X1(1:n,7)];
 Ytrain = table2array([carDataFinalRand(1:n,"price")]);
 
-model = fitlm(Xtrain,Ytrain);
+model = fitlm(Xtrain,Ytrain)
 
 Z = [];
 for i =1:size(X1)
@@ -33,5 +33,5 @@ for i = 1:size(Z)
         correct = correct +1;
     end
 end
-accuracy = correct/17953
+RLMaccuracy = correct/17953
 

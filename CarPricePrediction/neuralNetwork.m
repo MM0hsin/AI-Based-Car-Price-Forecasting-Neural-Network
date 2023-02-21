@@ -61,5 +61,5 @@ for i = 1:size(Z)
     end
 end
 
-accuracy = correct/4000
-fix(mean(abs(Z(:,3))))
+NNaccuracy = correct/4000
+%fix(mean(abs(Z(:,3))))
