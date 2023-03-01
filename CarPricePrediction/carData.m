@@ -1,4 +1,4 @@
-x = readtable("AllCars.xlsx");
+x = readtable("40kCars.xlsx");
 x = rmmissing(x);
 modelType = table2array(x(:,"model"));
 transmissionType = table2array(x(:,"transmission"));
@@ -10,7 +10,7 @@ typeModel = dictionary(name,nameN.');
 
 
 [transmission,~,transmissionNarray] = unique(transmissionType);
-transmissionN = 1:3;
+transmissionN = 1:size(transmission);
 typeTransmission = dictionary(transmission,transmissionN.');
 
 
