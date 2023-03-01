@@ -14,38 +14,31 @@ X1 = table2array([carDataFinalRand(:,"year"), ...
     carDataFinalRand(:,"model"),]);
 Y = table2array([carDataFinalRand(:,"price")]);
 
-n = 4000;
+n = 20000;
 Xtrain = [X1(1:n,1), X1(1:n,2), X1(1:n,3), ...
     X1(1:n,4), X1(1:n,5), X1(1:n,6), X1(1:n,7), X1(1:n,8)];
 Ytrain = table2array([carDataFinalRand(1:n,"price")]);
 
-n=n+1;
-n2 = 8000;
-Xtrain1 = [X1(n:n2,1), X1(n:n2,2), X1(n:n2,3), ...
-    X1(n:n2,4), X1(n:n2,5), X1(n:n2,6), X1(n:n2,7), X1(n:n2,8)];
-Ytrain1 = table2array([carDataFinalRand(n:n2,"price")]);
+n = n+1;
+n2 = 40000;
+Xtest = [X1(n:n2,1), X1(n:n2,2), X1(n:n2,3), ...
+    X1(n:n2,4), X1(n:n2,5), X1(n:n2,6), X1(n:n2,7),X1(n:n2,8)];
+Ytest = table2array([carDataFinalRand(n:n2,"price")]);
 
-n2 = n2+1;
-n3 = 12000;
-Xtest = [X1(n2:n3,1), X1(n2:n3,2), X1(n2:n3,3), ...
-    X1(n2:n3,4), X1(n2:n3,5), X1(n2:n3,6), X1(n2:n3,7),X1(n2:n3,8)];
-Ytest = table2array([carDataFinalRand(n2:n3,"price")]);
-
-
-n4 = 16000;
-Xtest1 = [X1(n3:n4,1), X1(n3:n4,2), X1(n3:n4,3), ...
-    X1(n3:n4,4), X1(n3:n4,5), X1(n3:n4,6), X1(n3:n4,7),X1(n3:n4,8)];
-Ytest1 = table2array([carDataFinalRand(n3:n4,"price")]);
 
 Xtrain = Xtrain.';
 Ytrain = Ytrain.';
 Xtest = Xtest.';
 Ytest =Ytest.';
 
+<<<<<<< HEAD
+net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainbr');
+=======
 net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainlm');
+>>>>>>> 16aa7abf15ae68934fe535c8a0dddc7f1b6ed1e0
 net.trainParam.show = 50;
 net.trainParam.lr = 0.05;
-net.trainParam.epochs = 100;
+net.trainParam.epochs = 1000;
 net.trainParam.goal = 1e-5;
 
 
@@ -61,5 +54,11 @@ for i = 1:size(Z)
     end
 end
 
+<<<<<<< HEAD
+fix(rmse(Z(:,1),Z(:,2)))
+
+%validation 
+=======
 NNaccuracy = correct/4000
 fix(mean(abs(Z(:,3))))
+>>>>>>> 16aa7abf15ae68934fe535c8a0dddc7f1b6ed1e0
