@@ -42,10 +42,10 @@ Ytrain = Ytrain.';
 Xtest = Xtest.';
 Ytest =Ytest.';
 
-net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainbfg');
+net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainl');
 net.trainParam.show = 50;
 net.trainParam.lr = 0.05;
-net.trainParam.epochs = 1000;
+net.trainParam.epochs = 100;
 net.trainParam.goal = 1e-5;
 
 
@@ -61,5 +61,5 @@ for i = 1:size(Z)
     end
 end
 
-accuracy = correct/4000
+NNaccuracy = correct/4000
 fix(mean(abs(Z(:,3))))
