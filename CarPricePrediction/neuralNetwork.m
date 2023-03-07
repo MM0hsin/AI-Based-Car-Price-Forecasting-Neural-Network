@@ -50,6 +50,6 @@ for i = 1:size(Z)
     end
 end
 
-fix(rmse(Z(:,1),Z(:,2)))
+NNRMSE = fix(rmse(Z(:,1),Z(:,2)))
 
 %validation 

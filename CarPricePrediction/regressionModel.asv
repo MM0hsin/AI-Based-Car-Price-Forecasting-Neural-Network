@@ -33,5 +33,5 @@ for i = 1:size(Z)
         correct = correct +1;
     end
 end
-RLMrmse = fix(rmse(Z(:,1),Z(:,2)))
+RLMaccuracy = correct/17953
 
