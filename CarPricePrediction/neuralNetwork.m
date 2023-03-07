@@ -31,11 +31,7 @@ Ytrain = Ytrain.';
 Xtest = Xtest.';
 Ytest =Ytest.';
 
-<<<<<<< HEAD
 net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainbr');
-=======
-net = newff(Xtrain,Ytrain,[20,20,20],{'logsig','purelin'},'trainlm');
->>>>>>> 16aa7abf15ae68934fe535c8a0dddc7f1b6ed1e0
 net.trainParam.show = 50;
 net.trainParam.lr = 0.05;
 net.trainParam.epochs = 1000;
@@ -54,11 +50,10 @@ for i = 1:size(Z)
     end
 end
 
-<<<<<<< HEAD
-fix(rmse(Z(:,1),Z(:,2)))
+NNrmse = fix(rmse(Z(:,1),Z(:,2)))
+NNmse = fix(mse(Z(:,1),Z(:,2)))
+NNaccuracy = correct/20000
+NNmean = fix(mean(abs(Z(:,3))))
 
-%validation 
-=======
-NNaccuracy = correct/4000
-fix(mean(abs(Z(:,3))))
->>>>>>> 16aa7abf15ae68934fe535c8a0dddc7f1b6ed1e0
+%validation
+
