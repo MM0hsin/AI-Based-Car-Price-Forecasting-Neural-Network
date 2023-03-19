@@ -32,11 +32,12 @@ newYtrain = Ytrain';
 newXtest = Xtest';
 newYtest =Ytest';
 
-net = newff(newXtrain,newYtrain,[1],{'logsig'},'trainlm');
+net = newff(newXtrain,newYtrain,[9,8],{'logsig','tansig'},'trainlm');
 net.trainParam.show = 10;
 net.trainParam.lr = 5;
-net.trainParam.epochs = 200;
-net.trainParam.goal = 1e-10;
+net.trainParam.epochs = 100;
+net.trainParam.goal = 1000;
+net.trainParam.mu_dec = 1e-10;
 
 [net, tr] = train(net,newXtrain,newYtrain);
 
