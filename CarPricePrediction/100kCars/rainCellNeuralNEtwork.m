@@ -14,7 +14,7 @@ X1 = table2array([carDataFinalRand(:,"year"), ...
     carDataFinalRand(:,"fuelType")]);
 y = table2array([carDataFinalRand(:,"price")]);
 
-X = (X1 - mean(X1)) ./ std(X1);
+X = zscore(X1);
 
 
 % Split the dataset into training and testing sets
@@ -46,9 +46,3 @@ rmse = rmse(y_pred', y_test);
 fprintf('MSE: %f\n', mse);
 fprintf('MAE: %f\n', mae);
 fprintf('R2: %f\n', rmse);
-
-% Make a prediction on a new car
-new_car = [2018, 45000, 4, 2.0, 4, 2, 1];
-new_car_norm = (new_car - mean(X)) ./ std(X);
-price = net(new_car_norm');
-fprintf('The predicted price for the new car is $%f\n', price);

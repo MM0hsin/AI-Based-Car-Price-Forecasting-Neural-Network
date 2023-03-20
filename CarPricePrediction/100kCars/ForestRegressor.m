@@ -32,4 +32,7 @@ Z = fix([a,Ytest,Ytest-a]);
 
 
 MLRrmse = fix(rmse(Z(:,1),Z(:,2)))
+NNmse = fix(mse(Z(:,1),Z(:,2)));
+NMSE = NNmse/mean(var(a,1));
+mlrRsquare = 1 - NMSE
 

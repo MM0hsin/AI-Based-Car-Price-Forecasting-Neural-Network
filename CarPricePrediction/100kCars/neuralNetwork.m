@@ -32,12 +32,13 @@ newYtrain = Ytrain';
 newXtest = Xtest';
 newYtest =Ytest';
 
-net = newff(newXtrain,newYtrain,[9],{'logsig','tansig'},'trainlm');
+net = newff(newXtrain,newYtrain,[10,10,10,10,5],{'logsig','tansig','tansig','tansig','logsig','purelin'},'trainbr');
 net.trainParam.show = 10;
-net.trainParam.lr = 5;
-net.trainParam.epochs = 100;
-net.trainParam.goal = 1000;
-net.trainParam.mu_dec = 1e-10;
+net.trainParam.lr = 100;
+net.trainParam.epochs = 500;
+net.trainParam.goal = 1e5;
+net.performFcn = 'msereg';
+
 
 [net, tr] = train(net,newXtrain,newYtrain);
 
@@ -49,8 +50,9 @@ Z = [a',newYtest',newYtest'-a'];
 
 
 NNrmse = fix(rmse(Z(:,1),Z(:,2))) + " at Epochs: " + net.trainParam.epochs
-NNrmse = fix(rmse(valZ(:,1),valZ(:,2))) + " of val at Epochs: " + net.trainParam.epochs
-NNmae = fix(mae(Z(:,1),Z(:,2)));
+NNmse = fix(mse(Z(:,1),Z(:,2)))
+NMSE = NNmse/mean(var(a,1));
+Rsquare = 1 - NMSE
 
 %validation
 
