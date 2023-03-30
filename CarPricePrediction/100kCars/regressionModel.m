@@ -10,10 +10,8 @@ X1 = table2array([carDataFinalRand(:,"year"), ...
     carDataFinalRand(:,"mpg"),...
     carDataFinalRand(:,"engineSize"), ...
     carDataFinalRand(:,"automatic"),...
-    carDataFinalRand(:,"fuelType")]);
+    carDataFinalRand(:,"fuelType"),]);
 Y = table2array([carDataFinalRand(:,"price")]);
-
-
 
 %use 70% of data for training rest for testing
 n = round(size(carDataFinal(:,1))*0.7);
@@ -31,7 +29,3 @@ model = fitlm(Xtrain,Ytrain)
 pred = fix(predict(model,Xtest));
 
 Z = fix([pred,Ytest,pred-Ytest]);
-
-
-MLRrmse = fix(rmse(Z(:,1),Z(:,2)))
-
